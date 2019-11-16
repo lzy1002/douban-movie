@@ -17,7 +17,7 @@
     props: {
       isLoading: {
         type: Boolean,
-        default: false
+        default: true
       }
     }
   }
@@ -34,10 +34,11 @@
       transform scale(0)
 
   .loading-box
+    display flex
+    align-items center
+    justify-content center
     width 100%
     height 50px
-    line-height 50px
-    text-align center
     .loading
       span
         display inline-block
@@ -47,13 +48,13 @@
         background-color $color-theme
         transform-origin center
         &.loading-item-1
-          animation loading 1s linear 0.26s infinite
+          animation loading 1s linear 0s infinite
         &.loading-item-2
-          animation loading 1s linear 0.39s infinite
+          animation loading 1s linear 0.26s infinite
         &.loading-item-3
-          animation loading 1s linear 0.52s infinite
+          animation loading 1s linear 0.39s infinite
         &.loading-item-4
-          animation loading 1s linear 0.65s infinite
+          animation loading 1s linear 0.52s infinite
         &.loading-item-5
-          animation loading 1s linear 0.78s infinite
+          animation loading 1s linear 0.65s infinite
 </style>

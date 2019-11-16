@@ -12,3 +12,14 @@ export function getNowData(start, count) {
     }
   })
 }
+
+export function getSoonData(start, count) {
+  return request({
+    url: "/v2/movie/coming_soon",
+    params: {
+      apikey: apikey,
+      start: start,
+      count: count
+    }
+  })
+}

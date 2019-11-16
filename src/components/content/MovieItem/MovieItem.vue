@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import {attachImageUrl} from "../../../common/js/utils.js";
+
   import Star from "../../common/Star/Star.vue";
 
   export default {
@@ -33,10 +35,8 @@
       Star
     },
     filters: {
-      attachImageUrl(srcUrl) {
-        if(srcUrl !== undefined){
-          return srcUrl.replace(/http:\/\//, 'https://images.weserv.nl/?url=')
-        }
+      attachImageUrl(imgUrl) {
+        return attachImageUrl(imgUrl);
       }
     },
     mounted(){

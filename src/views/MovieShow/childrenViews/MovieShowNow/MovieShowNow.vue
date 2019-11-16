@@ -4,11 +4,14 @@
       <movie-item v-if="nowList.length > 0" v-for="(item, index) in nowList" :subject="item" @refresh="refresh"></movie-item>
       <loading v-if="nowList.length > 0" :is-loading="nowList.length !== total"></loading>
     </scroll>
+    <loading class="loading" v-if="nowList.length <= 0"></loading>
   </div>
 </template>
 
 <script>
   import {getNowData} from "../../../../api/movieList.js";
+
+  import {deBounce} from "../../../../common/js/utils.js";
 
   import Scroll from "../../../../components/common/Scroll/Scroll.vue";
 
@@ -27,7 +30,8 @@
         start: 0,
         count: 10,
         total: 1,
-        nowList: []
+        nowList: [],
+        deBounce: null
       }
     },
     methods: {
@@ -47,11 +51,14 @@
         this.getNowData();
       },
       refresh(){
-        this.$refs.scroll.refresh();
+        this.deBounce();
       }
     },
     created(){
       this.getNowData();
+    },
+    mounted(){
+      this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
     }
   }
 </script>
@@ -65,6 +72,12 @@
     width 100%
     overflow hidden
     .scroll
+      width 100%
+      height 100%
+    .loading
+      position absolute
+      top 0
+      left 0
       width 100%
       height 100%
 </style>
