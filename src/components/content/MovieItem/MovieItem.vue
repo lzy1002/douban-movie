@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-item">
+  <div class="movie-item" @click="changePath(subject.id)">
     <div class="image">
       <img :src="subject.images.small | attachImageUrl">
     </div>
@@ -33,6 +33,11 @@
     },
     components: {
       Star
+    },
+    methods: {
+      changePath(movieId){
+        this.$router.push("/movie-info/"+movieId);
+      }
     },
     filters: {
       attachImageUrl(imgUrl) {

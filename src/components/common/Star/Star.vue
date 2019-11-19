@@ -23,7 +23,7 @@
       },
       starArr(){
         let arr = [];
-        let score = this.score / 2;
+        let score = this.score > 5 ? this.score / 2 : this.score;
         let integer = Math.floor(score);
         for(let i = 0; i< integer; i++){
           arr.push("on");

@@ -29,6 +29,9 @@
     methods: {
       refresh(){
         this.scroll.refresh();
+      },
+      scrollTo(x, y, time){
+        this.scroll.scrollTo(x, y, time);
       }
     },
     mounted(){
