@@ -11,7 +11,8 @@ export default new Vuex.Store({
   state: {
     wantedArr: [],
     watchedArr: [],
-    thumbArr: []
+    thumbArr: [],
+    celebrityArr: []
   },
   mutations,
   actions,

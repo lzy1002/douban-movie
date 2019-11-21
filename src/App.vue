@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="MovieInfo">
+    <keep-alive exclude="MovieInfo,Celebrity">
       <router-view></router-view>
     </keep-alive>
     <tab-bar></tab-bar>

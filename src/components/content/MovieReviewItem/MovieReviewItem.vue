@@ -37,6 +37,11 @@
     },
     created(){
       console.log(this.review);
+    },
+    mounted(){
+      this.$nextTick(() => {
+        this.$emit("itemLoad");
+      })
     }
   }
 </script>

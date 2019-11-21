@@ -30,6 +30,16 @@ export default {
     }else {
       context.commit("deleteToThumb", index);
     }
+  },
+  changeCollection(context,celebrityData){
+    const index = context.state.celebrityArr.findIndex((item) => {
+      return item.id === celebrityData.id;
+    });
+    if(index < 0){
+      context.commit("addToCelebrity", celebrityData);
+    }else {
+      context.commit("deleteToCelebrity", index);
+    }
   }
 }
 

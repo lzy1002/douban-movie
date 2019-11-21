@@ -27,6 +27,7 @@
         <div class="no">没用({{reviewData.useless_count}})</div>
       </div>
     </scroll>
+    <loading v-else class="screen-loading"></loading>
   </div>
 </template>
 
@@ -37,13 +38,15 @@
   import Star from "../../components/common/Star/Star.vue";
 
   import FixedBar from "../../components/content/FixedBar/FixedBar.vue";
+  import Loading from "../../components/content/Loading/Loading.vue";
 
   export default {
     name: "Review",
     components: {
       Scroll,
       Star,
-      FixedBar
+      FixedBar,
+      Loading
     },
     data(){
       return {
@@ -148,4 +151,7 @@
           color $color-title
         .yes
           margin-right 10px
+    .screen-loading
+      width 100%
+      height 100%
 </style>

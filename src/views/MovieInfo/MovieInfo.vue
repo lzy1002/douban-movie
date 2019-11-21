@@ -51,12 +51,12 @@
           <h3 class="title">影人</h3>
           <div v-if="infoData.casts" class="wrapper" ref="scrollRow">
             <div class="casts-box">
-              <div class="casts-item" v-for="item in infoData.directors">
+              <div class="casts-item" v-for="item in infoData.directors" @click="toCelebrity(item.id)">
                 <img :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
                 <p>导演</p>
               </div>
-              <div class="casts-item" v-for="item in infoData.casts">
+              <div class="casts-item" v-for="item in infoData.casts"  @click="toCelebrity(item.id)">
                 <img :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
               </div>
@@ -66,13 +66,13 @@
       </div>
       <div class="comment">
         <tab-control class="tab-control" :title-list="titleList" @itemClick="itemClick"></tab-control>
-        <div v-if="activeIndex === 0" class="movie-comment">
+        <div v-show="activeIndex === 0" class="movie-comment">
           <movie-comment-item v-for="(item, index) in infoData.popular_comments" :comment="item"></movie-comment-item>
           <div class="more-comment" @click="toComments">全部短评{{infoData.comments_count}}个</div>
         </div>
-        <div v-if="activeIndex === 1" class="movie-review">
+        <div v-show="activeIndex === 1" class="movie-review">
           <movie-review-item v-for="(item, index) in infoData.popular_reviews" :review="item" :movie-id="infoData.id"></movie-review-item>
-          <div class="more-review">全部影评{{infoData.reviews_count}}个</div>
+          <div class="more-review" @click="toReviews">全部影评{{infoData.reviews_count}}个</div>
         </div>
       </div>
     </scroll>
@@ -167,6 +167,12 @@
       },
       toComments(){
         this.$router.push(`/movie-info/${this.$route.params.movieId}/comments`);
+      },
+      toReviews(){
+        this.$router.push(`/movie-info/${this.$route.params.movieId}/reviews`);
+      },
+      toCelebrity(celebrityId){
+        this.$router.push(`/celebrity/${celebrityId}`);
       }
     },
     computed: {
@@ -335,6 +341,8 @@
               margin-right 8px
               font-size $font-size-small
               text-align center
+              &:last-child
+                margin-right 0
               img
                 width 90px
                 height 120px

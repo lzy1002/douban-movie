@@ -36,6 +36,19 @@ export default {
   },
   deleteToThumb(state, index){
     state.thumbArr.splice(index, 1);
+  },
+  addToCelebrity(state, celebrityData){
+    const obj = {
+      id: celebrityData.id,
+      avatars: celebrityData.avatars,
+      name: celebrityData.name,
+      name_en: celebrityData.name_en,
+      works: celebrityData.works
+    };
+    state.celebrityArr.push(obj);
+  },
+  deleteToCelebrity(state, index){
+    state.celebrityArr.splice(index, 1);
   }
 }
 

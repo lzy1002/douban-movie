@@ -7,5 +7,8 @@ export default {
   },
   takeThumbArr(state, getters){
     return state.thumbArr;
+  },
+  takeCelebrityArr(state, getters){
+    return state.celebrityArr;
   }
 }

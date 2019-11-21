@@ -1,8 +1,8 @@
 <template>
   <div class="comments">
-    <fixed-bar class="fixed-bar" @leftClick="back" @rightClick="toTop">
+    <fixed-bar v-if="title" class="fixed-bar" @leftClick="back" @rightClick="toTop">
       <i slot="left" class="icon-arrow_lift"></i>
-      <span slot="center">全部短评</span>
+      <span slot="center">{{title}}的全部短评</span>
       <i slot="right" class="icon-circle-up"></i>
     </fixed-bar>
     <scroll v-if="commentsData.length > 0" class="scroll" ref="scroll" :pullUpLoad="true" @pullingUp="pullingUp">
@@ -36,12 +36,14 @@
         start: 0,
         count: 20,
         total: 1,
-        commentsData: []
+        commentsData: [],
+        title: ""
       }
     },
     methods: {
       getCommentsData(movieId, start, count){
         getCommentsData(movieId, start, count).then(res => {
+          this.title = res.subject.title;
           this.total = res.total;
           this.commentsData.push(...res.comments);
           this.start += this.count;
