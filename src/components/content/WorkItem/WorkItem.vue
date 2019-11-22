@@ -2,7 +2,7 @@
   <div class="work-item" @click="toMovieInfo">
     <div class="main">
       <div class="imageBox">
-        <img :src="work.subject.images.medium | attachImageUrl" alt="">
+        <img :src="this.work.subject.images.medium | attachImageUrl" alt="">
       </div>
       <div class="content">
         <h3 class="title">{{work.subject.title}}</h3>
@@ -40,6 +40,15 @@
     methods: {
       toMovieInfo(){
         this.$router.push(`/movie-info/${this.work.subject.id}`);
+      }
+    },
+    computed: {
+      imgUrlSwitch(){
+        if(this.work.subject.images){
+          return attachImageUrl(this.work.subject.images.medium);
+        }else if (this.work.images){
+          return attachImageUrl(this.work.images.medium);
+        }
       }
     },
     filters: {

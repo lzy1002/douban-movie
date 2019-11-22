@@ -322,6 +322,7 @@
       bottom 0
       z-index 6
       padding 50px 20px 20px 20px
+      overflow hidden
       color: $color-title
       background-color $color-background
       .top-bar
