@@ -1,7 +1,7 @@
 <template>
   <div class="top-250-wrapper">
     <scroll v-if="listArr.length > 0" class="scroll" ref="scroll" :pullUpLoad="true" @pullingUp="pullingUp">
-      <rank-item v-for="(item, index) in listArr" :list-data="item" :title-num="(index + 1) + 200"></rank-item>
+      <rank-item v-for="(item, index) in listArr" :list-data="item" :title-num="(index + 1) + 200" @itemLoad="itemLoad"></rank-item>
       <loading v-if="listArr.length > 0" :is-loading="listArr.length !== total"></loading>
     </scroll>
     <loading v-else class="screen-loading"></loading>
@@ -43,6 +43,9 @@
           return false;
         }
         this.getTop250Data(this.start, this.count);
+      },
+      itemLoad(){
+        this.$refs.scroll.refresh();
       }
     },
     created(){

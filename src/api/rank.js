@@ -47,3 +47,11 @@ export function getUsBoxData() {
     }
   })
 }
+
+export function formatUsBoxData(usBoxData) {
+  let arr = [];
+  for(let i = 0; i< usBoxData.subjects.length; i++){
+    arr.push(usBoxData.subjects[i].subject);
+  }
+  return arr;
+}

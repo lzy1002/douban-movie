@@ -12,3 +12,11 @@ export function getWorksData(celebrityId, start, count) {
     }
   })
 }
+
+export function fotmatWorksData(worksData) {
+  let arr = [];
+  for(let i = 0; i< worksData.works.length; i++){
+    arr.push(worksData.works[i].subject);
+  }
+  return arr;
+}

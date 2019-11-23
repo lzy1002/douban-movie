@@ -5,7 +5,8 @@ export default {
       title: infoData.title,
       images: infoData.images,
       directors: infoData.directors,
-      casts: infoData.casts
+      casts: infoData.casts,
+      rating: infoData.rating
     };
     state.wantedArr.push(obj);
   },
@@ -21,7 +22,8 @@ export default {
       title: infoData.title,
       images: infoData.images,
       directors: infoData.directors,
-      casts: infoData.casts
+      casts: infoData.casts,
+      rating: infoData.rating
     };
     state.watchedArr.push(obj);
   },

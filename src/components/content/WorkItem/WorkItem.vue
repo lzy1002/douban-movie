@@ -2,17 +2,17 @@
   <div class="work-item" @click="toMovieInfo">
     <div class="main">
       <div class="imageBox">
-        <img :src="this.work.subject.images.medium | attachImageUrl" alt="">
+        <img :src="this.work.images.medium | attachImageUrl" alt="">
       </div>
       <div class="content">
-        <h3 class="title">{{work.subject.title}}</h3>
-        <div  v-if="work.subject.rating.average > 0"><star :size="24" :score="work.subject.rating.average"></star><span>{{work.subject.rating.average}}</span></div>
+        <h3 class="title">{{work.title}}</h3>
+        <div v-if="work.rating.average > 0"><star :size="24" :score="work.rating.average"></star><span>{{work.rating.average}}</span></div>
         <span v-else class="no-time">暂无评分</span>
         <p class="directors">
-          导演: <span v-for="(item, index) in work.subject.directors">{{item.name}}<span v-show="index+1 !== work.subject.directors.length">/</span></span>
+          导演: <span v-for="(item, index) in work.directors">{{item.name}}<span v-show="index+1 !== work.directors.length">/</span></span>
         </p>
         <p class="casts">
-          主演: <span v-for="(item, index) in work.subject.casts">{{item.name}}<span v-show="index+1 !== work.subject.casts.length">/</span></span>
+          主演: <span v-for="(item, index) in work.casts">{{item.name}}<span v-show="index+1 !== work.casts.length">/</span></span>
         </p>
       </div>
     </div>
@@ -39,16 +39,7 @@
     },
     methods: {
       toMovieInfo(){
-        this.$router.push(`/movie-info/${this.work.subject.id}`);
-      }
-    },
-    computed: {
-      imgUrlSwitch(){
-        if(this.work.subject.images){
-          return attachImageUrl(this.work.subject.images.medium);
-        }else if (this.work.images){
-          return attachImageUrl(this.work.images.medium);
-        }
+        this.$router.push(`/movie-info/${this.work.id}`);
       }
     },
     filters: {

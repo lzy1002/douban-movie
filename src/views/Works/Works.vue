@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import {getWorksData} from "../../api/works.js";
+  import {getWorksData, fotmatWorksData} from "../../api/works.js";
 
   import Scroll from "../../components/common/Scroll/Scroll.vue";
 
@@ -44,7 +44,9 @@
           console.log(res);
           this.total = res.total;
           this.start += this.count;
-          this.worksData.push(...res.works);
+          let format = fotmatWorksData(res);
+          console.log(format);
+          this.worksData.push(...format);
         })
       },
       pullingUp(){
