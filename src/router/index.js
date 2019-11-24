@@ -16,6 +16,7 @@ const Top250 = () => import("../views/Top250/Top250.vue");
 const Weekly = () => import("../views/Weekly/Weekly.vue");
 const NewMovies = () => import("../views/NewMovies/NewMovies.vue");
 const UsBox = () => import("../views/UsBox/UsBox.vue");
+const Search = () => import("../views/Search/Search.vue");
 
 const routes = [
   {path: "/", redirect: "/movie-show"},
@@ -40,7 +41,8 @@ const routes = [
     children: [
       {path: "works", component: Works}
     ]
-  }
+  },
+  {path: "/search", component: Search}
 ];
 
 const router = new VueRouter({

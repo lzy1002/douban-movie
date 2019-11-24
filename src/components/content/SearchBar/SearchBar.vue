@@ -1,6 +1,6 @@
 <template>
-  <div class="search-bar">
-    <img class="logo" src="./images/logo.png" alt="">
+  <div class="search-bar" @click="toSearch">
+    <img class="logo" src="../../../common/images/logo.png" alt="">
     <div class="search-box">
       <p class="text">
         <i class="icon-search"></i>
@@ -12,7 +12,12 @@
 
 <script>
   export default {
-    name: "SearchBar"
+    name: "SearchBar",
+    methods: {
+      toSearch(){
+        this.$router.push("/search");
+      }
+    }
   }
 </script>
 

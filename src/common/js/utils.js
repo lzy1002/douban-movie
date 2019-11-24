@@ -13,3 +13,13 @@ export function attachImageUrl(imgUrl) {
     return imgUrl.replace(/http:\/\//, 'https://images.weserv.nl/?url=');
   }
 }
+
+export function getDate() {
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let week = date.getDay();
+  let weekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+  return `${year}年${month}月${day}日, ${weekArr[week]}`;
+}
