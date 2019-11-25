@@ -40,11 +40,9 @@
     methods: {
       getWeeklyData(){
         getWeeklyData().then(res => {
-          console.log(res);
           let arr = formatWeeklyData(res);
           this.weeklyData.push(...arr);
           this.total = arr.length;
-          console.log(this.weeklyData);
         })
       },
       leftClick(){

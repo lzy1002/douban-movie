@@ -50,6 +50,9 @@
         })
       },
       pullingUp(){
+        if(this.commentsData.length === this.total){
+          return;
+        }
         this.getCommentsData(this.$route.params.movieId, this.start, this.count);
       },
       itemLoad(){
@@ -63,7 +66,6 @@
       }
     },
     created(){
-      console.log(this.$route.params.movieId);
       this.getCommentsData(this.$route.params.movieId, this.start, this.count);
     }
   }

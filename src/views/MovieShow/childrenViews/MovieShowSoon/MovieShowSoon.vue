@@ -3,21 +3,21 @@
     <scroll class="scroll" ref="scroll" :pullUpLoad="true" :probetype="3" @pullingUp="pullingUp" @scroll="scroll">
       <ul class="list-box" ref="listBox">
         <li class="list-item" v-for="(item, index) in soonList">
-          <div class="fixedTitle" v-if="titleIsShow(item.mainland_pubdate)">{{item.mainland_pubdate || '上映日期待定'}}</div>
+          <div class="fixedTitle" v-if="titleIsShow(item.mainland_pubdate)">{{item.mainland_pubdate | decDate}}</div>
           <movie-item :subject="item" @refresh="refresh"></movie-item>
         </li>
       </ul>
       <loading v-if="soonList.length > 0" :isLoading="soonList.length !== total"></loading>
     </scroll>
     <loading class="loading" v-if="soonList.length <= 0"></loading>
-    <div class="fixed-box" ref="fixedbox">{{textArr[activeIndex]}}</div>
+    <div class="fixed-box" ref="fixedbox" v-show="scrollY < 0">{{activeText}}</div>
   </div>
 </template>
 
 <script>
   import {getSoonData} from "../../../../api/movieList.js";
 
-  import {deBounce} from "../../../../common/js/utils.js";
+  import {deBounce, decDate} from "../../../../common/js/utils.js";
 
   import Scroll from "../../../../components/common/Scroll/Scroll.vue";
 
@@ -44,23 +44,27 @@
         scrollY: 0,
         fixedTitleTopArr: [],
         textArr: [],
-        activeIndex: 0
+        activeIndex: -1,
+        nextHeight: 0,
+        diff: -1,
+        fixedMove: 0
       }
     },
     methods: {
       getSoonData(start, count){
         getSoonData(start, count).then(res => {
-          console.log(res);
           this.soonList.push(...res.subjects);
           this.start += this.count;
           this.total = res.total;
-          console.log(this.soonList);
           this.$nextTick(() => {
             this.createArray();
           })
         })
       },
       pullingUp(){
+        if(this.soonList.length === this.total){
+          return;
+        }
         this.getSoonData(this.start, this.count);
       },
       titleIsShow(pubdata){
@@ -77,12 +81,12 @@
       scroll(position){
         this.scrollY = position.y;
         for(let i = 0; i< this.fixedTitleTopArr.length; i++){
-          if((this.activeIndex!== i) && (this.scrollY <= -this.fixedTitleTopArr[i] && this.scrollY > -this.fixedTitleTopArr[i+1])){
+          if((this.activeIndex !== i) && (this.scrollY <= -this.fixedTitleTopArr[i] && this.scrollY > -this.fixedTitleTopArr[i+1])){
             this.activeIndex = i;
-            console.log(i);
+            this.nextHeight = this.fixedTitleTopArr[this.activeIndex + 1];
           }
         }
-        this.suctionTop();
+        this.diff = this.nextHeight + this.scrollY;
       },
       createArray(){
         let topArr = [];
@@ -95,23 +99,26 @@
         topArr.push(Number.MAX_VALUE);
         this.fixedTitleTopArr = topArr;
         this.textArr = textArr;
-        console.log(this.fixedTitleTopArr);
-        console.log(this.textArr);
-      },
-      suctionTop(){
-        let nextTop = -this.fixedTitleTopArr[this.activeIndex + 1];
-        let maxScrollY = nextTop + fixedTitleHeight;
-        if(this.scrollY <= maxScrollY){
-          let fixedTitleMove = this.scrollY + (-maxScrollY);
-          this.$refs.fixedbox.style.transform = `translateY(${fixedTitleMove}px)`;
-
-          if(Math.floor(fixedTitleMove-1) <= -fixedTitleHeight){
-            console.log(Math.floor(fixedTitleMove-1));
-            console.log(-fixedTitleHeight);
-            console.log(123);
-            this.$refs.fixedbox.style.transform = `translateY(${0}px)`;
-          }
+      }
+    },
+    computed: {
+      activeText(){
+        return this.textArr[this.activeIndex] ? this.textArr[this.activeIndex] : "";
+      }
+    },
+    filters: {
+      decDate(date){
+        return date ? decDate(date) : "上映日期待定";
+      }
+    },
+    watch: {
+      diff(newVal){
+        let fixedMove = newVal > 0 && newVal < fixedTitleHeight ? newVal - fixedTitleHeight : 0;
+        if(this.fixedMove === fixedMove){
+          return;
         }
+        this.fixedMove = fixedMove;
+        this.$refs.fixedbox.style.transform = `translateY(${fixedMove}px)`;
       }
     },
     created(){
@@ -120,22 +127,9 @@
     mounted(){
       this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
     },
-    // updated(){
-    //   setTimeout(() => {
-    //     let topArr = [];
-    //     let textArr = [];
-    //     let titles = this.$refs.listBox.querySelectorAll(".fixedTitle");
-    //     titles.forEach((item, index) => {
-    //       topArr.push(item.offsetTop);
-    //       textArr.push(item.innerText);
-    //     });
-    //     topArr.push(Number.MAX_VALUE);
-    //     this.fixedTitleTopArr = topArr;
-    //     this.textArr = textArr;
-    //     console.log(this.fixedTitleTopArr);
-    //     console.log(this.textArr);
-    //   },20);
-    // }
+    activated(){
+      this.$refs.scroll.refresh();
+    }
   }
 </script>
 

@@ -120,7 +120,6 @@
     methods: {
       getCelebrityData(celebrityId){
         getCelebrityData(celebrityId).then(res => {
-          console.log(res);
           this.celebrityData = res;
           this.$nextTick(() => {
             new BScroll(this.$refs.rowWrapper, {
@@ -175,7 +174,6 @@
       }
     },
     created(){
-      console.log(this.$route.params.celebrityId);
       this.getCelebrityData(this.$route.params.celebrityId);
     }
   }

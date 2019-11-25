@@ -1,5 +1,16 @@
+import {
+  ADD_TO_WANTED,
+  ADD_TO_WATCHED,
+  ADD_TO_THUMB,
+  ADD_TO_CELEBRITY,
+  DELETE_TO_WANTED,
+  DELETE_TO_WATCHED,
+  DELETE_TO_THUMB,
+  DELETE_TO_CELEBRITY
+} from "./mutations-types";
+
 export default {
-  addToWanted(state, infoData){
+  [ADD_TO_WANTED](state, infoData){
     const obj = {
       id: infoData.id,
       title: infoData.title,
@@ -10,13 +21,10 @@ export default {
     };
     state.wantedArr.push(obj);
   },
-  deleteToWanted(state, infoData){
-    const index = state.wantedArr.findIndex((item) => {
-      return item.id === infoData.id;
-    });
+  [DELETE_TO_WANTED](state, index){
     state.wantedArr.splice(index, 1);
   },
-  addToWatched(state, infoData){
+  [ADD_TO_WATCHED](state, infoData){
     const obj = {
       id: infoData.id,
       title: infoData.title,
@@ -27,19 +35,16 @@ export default {
     };
     state.watchedArr.push(obj);
   },
-  deleteToWatched(state, infoData){
-    const index = state.watchedArr.findIndex((item) => {
-      return item.id === infoData.id;
-    });
+  [DELETE_TO_WATCHED](state, index){
     state.watchedArr.splice(index, 1);
   },
-  addToThumb(state, commentId){
+  [ADD_TO_THUMB](state, commentId){
     state.thumbArr.push(commentId);
   },
-  deleteToThumb(state, index){
+  [DELETE_TO_THUMB](state, index){
     state.thumbArr.splice(index, 1);
   },
-  addToCelebrity(state, celebrityData){
+  [ADD_TO_CELEBRITY](state, celebrityData){
     const obj = {
       id: celebrityData.id,
       avatars: celebrityData.avatars,
@@ -49,8 +54,7 @@ export default {
     };
     state.celebrityArr.push(obj);
   },
-  deleteToCelebrity(state, index){
+  [DELETE_TO_CELEBRITY](state, index){
     state.celebrityArr.splice(index, 1);
   }
 }
-

@@ -43,11 +43,12 @@
           this.nowList.push(...res.subjects);
           this.start += this.count;
           this.total = res.total;
-          console.log(this.nowList);
         })
       },
       pullingUp(){
-        console.log("触发了上拉加载");
+        if(this.nowList.length === this.total){
+          return;
+        }
         this.getNowData();
       },
       refresh(){
@@ -59,6 +60,9 @@
     },
     mounted(){
       this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
+    },
+    activated(){
+      this.$refs.scroll.refresh();
     }
   }
 </script>

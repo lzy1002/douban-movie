@@ -63,9 +63,6 @@
         return attachImageUrl(imgUrl);
       }
     },
-    created(){
-      console.log(this.listData);
-    },
     mounted(){
       this.$nextTick(() => {
         this.$emit("itemLoad");

@@ -40,7 +40,7 @@
       },
       pullingUp(){
         if(this.listArr.length === this.total){
-          return false;
+          return;
         }
         this.getTop250Data(this.start, this.count);
       },

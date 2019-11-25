@@ -20,6 +20,9 @@
     name: "TabBar",
     methods: {
       changePath(path){
+        if(this.$route.path === path){
+          return;
+        }
         this.$router.replace(path);
       }
     }
@@ -38,6 +41,7 @@
     height 60px
     width 100%
     border-top 1px solid $color-theme
+    background-color $color-background
     .tab-bar-item
       flex 1
       text-align center

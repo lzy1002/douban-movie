@@ -64,9 +64,7 @@
       }
     },
     created(){
-      console.log(this.$route.params.reviewId);
       getReviewData(this.$route.params.reviewId).then(res => {
-        console.log(res);
         this.reviewData = res;
       })
     }

@@ -60,9 +60,6 @@
     computed: {
       ...mapGetters(["takeThumbArr"])
     },
-    created(){
-      console.log(this.comment);
-    },
     mounted(){
       this.$nextTick(() => {
         this.$emit("itemLoad");

@@ -46,16 +46,17 @@
     methods: {
       getReviewsData(movieId, start, count){
         getReviewsData(movieId, start, count).then(res => {
-          console.log(res);
           this.title = res.subject.title;
           this.reviewsData.push(...res.reviews);
           this.total = res.total;
           this.start += this.count;
           this.movieId = res.subject.id;
-          console.log(this.reviewsData);
         })
       },
       pullingUp(){
+        if(this.reviewsData.length === this.total){
+          return;
+        }
         this.getReviewsData(this.$route.params.movieId, this.start, this.count);
       },
       itemLoad(){
@@ -69,7 +70,6 @@
       }
     },
     created(){
-      console.log(this.$route.params.movieId);
       this.getReviewsData(this.$route.params.movieId, this.start, this.count);
     }
   }

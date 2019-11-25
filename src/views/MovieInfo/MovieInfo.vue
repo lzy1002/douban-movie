@@ -19,8 +19,7 @@
             <h1 class="title">{{infoData.title}}</h1>
             <p class="type">
               <span>{{infoData.year}}/</span>
-              <span v-for="(item, index) in infoData.genres">{{item}}<span
-                      v-if="index+1 !== infoData.genres.length">/</span></span>
+              <span v-for="(item, index) in infoData.genres">{{item}}<span v-if="index+1 !== infoData.genres.length">/</span></span>
             </p>
             <p class="original-name">原名: {{infoData.original_title}}</p>
             <p class="release-time">上映时间: {{infoData.pubdates[1]}}</p>
@@ -30,8 +29,7 @@
             <p class="title">豆瓣评分</p>
             <p class="score" v-if="infoData.rating.average">{{infoData.rating.average}}</p>
             <star :size="24" :score="infoData.rating.average"></star>
-            <p class="ratings-count"><span v-if="infoData.rating.average">{{infoData.ratings_count}}人</span><span
-                    v-else>暂无评分</span></p>
+            <p class="ratings-count"><span v-if="infoData.rating.average">{{infoData.ratings_count}}人</span><span v-else>暂无评分</span></p>
           </div>
         </div>
         <div class="operate border-1px">
@@ -49,17 +47,20 @@
         </div>
         <div class="casts border-1px">
           <h3 class="title">影人</h3>
-          <div v-if="infoData.casts" class="wrapper" ref="scrollRow">
-            <div class="casts-box">
-              <div class="casts-item" v-for="item in infoData.directors" @click="toCelebrity(item.id)">
-                <img :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
+          <div class="wrapper" ref="scrollRow">
+            <div v-if="infoData.casts.length > 0 || infoData.directors.length > 0" class="casts-box">
+              <div v-if="item.id !== null" class="casts-item" v-for="item in infoData.directors" @click="toCelebrity(item.id)">
+                <img v-if="item.avatars !== null" :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
                 <p>导演</p>
               </div>
-              <div class="casts-item" v-for="item in infoData.casts"  @click="toCelebrity(item.id)">
-                <img :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
+              <div v-if="item.id !== null" class="casts-item" v-for="item in infoData.casts"  @click="toCelebrity(item.id)">
+                <img v-if="item.avatars !== null" :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
               </div>
+            </div>
+            <div v-else class="no-casts">
+              该影片暂时没有影人信息 :)
             </div>
           </div>
         </div>
@@ -68,17 +69,18 @@
         <tab-control class="tab-control" :title-list="titleList" @itemClick="itemClick"></tab-control>
         <div v-show="activeIndex === 0" class="movie-comment">
           <movie-comment-item v-for="(item, index) in infoData.popular_comments" :comment="item"></movie-comment-item>
-          <div class="more-comment" @click="toComments">全部短评{{infoData.comments_count}}个</div>
+          <div v-if="infoData.popular_comments.length > 0" class="more-comment" @click="toComments">全部短评{{infoData.comments_count}}个</div>
+          <div v-else class="no-comment">暂时没有任何短评</div>
         </div>
         <div v-show="activeIndex === 1" class="movie-review">
           <movie-review-item v-for="(item, index) in infoData.popular_reviews" :review="item" :movie-id="infoData.id"></movie-review-item>
-          <div class="more-review" @click="toReviews">全部影评{{infoData.reviews_count}}个</div>
+          <div v-if="infoData.popular_reviews.length > 0" class="more-review" @click="toReviews">全部影评{{infoData.reviews_count}}个</div>
+          <div v-else class="no-review">暂时没有任何影评</div>
         </div>
       </div>
     </scroll>
 
     <loading v-else class="loading"></loading>
-
 
     <router-view></router-view>
 
@@ -136,7 +138,6 @@
       },
       wantedActive() {
         const index = this.takeWantedArr.findIndex((item) => {
-          console.log(item.id, this.infoData.id);
           return item.id === this.infoData.id;
         });
         if (index > -1) {
@@ -184,10 +185,8 @@
       }
     },
     created() {
-      console.log(this.$route.params.movieId);
       getMovieInfoData(this.$route.params.movieId).then(res => {
         this.infoData = res;
-        console.log(res);
         this.$nextTick(() => {
           new BScroll(this.$refs.scrollRow, {
             scrollX: true
@@ -196,7 +195,7 @@
           this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
         })
       });
-    }
+    },
   }
 </script>
 
@@ -352,21 +351,27 @@
                 white-space nowrap
                 overflow hidden
                 padding 8px 0 5px 0
+        .no-casts
+          width 100%
+          height 100px
+          line-height 100px
+          text-align center
+          font-size $font-size-medium
       .comment
         position relative
         width 100%
         padding 0 20px
         background-color $color-background
-        .tab-control
-          height 49px
         .movie-comment,.movie-review
           width 100%
           padding 20px 0
           background-color $color-background
-          .more-comment,.more-review
+          .more-comment,.more-review,.no-comment,.no-review
             text-align center
             font-size $font-size-medium
             padding-bottom 10px
             color $color-theme
+          .no-comment,.no-review
+            color $color-title
 
 </style>

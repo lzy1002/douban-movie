@@ -44,4 +44,7 @@
     .center
       flex 1
       line-height 50px
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
 </style>

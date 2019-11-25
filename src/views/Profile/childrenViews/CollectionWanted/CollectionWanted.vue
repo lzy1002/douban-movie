@@ -26,7 +26,6 @@
       ...mapGetters(["takeWantedArr"])
     },
     activated(){
-      console.log(this.takeWantedArr);
       this.$refs.scroll.refresh();
     }
   }

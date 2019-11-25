@@ -40,10 +40,8 @@
     methods: {
       getNewMovieData(){
         getNewMovieData().then(res => {
-          console.log(res);
           this.newMoviesData.push(...res.subjects);
           this.total = res.subjects.length;
-          console.log(this.newMoviesData);
         })
       },
       leftClick(){

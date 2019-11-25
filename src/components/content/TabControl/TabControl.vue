@@ -41,6 +41,7 @@
     display flex
     width 100%
     height 48px
+    line-height 48px
     .active
       border-bottom 1px solid $color-theme
       color $color-theme

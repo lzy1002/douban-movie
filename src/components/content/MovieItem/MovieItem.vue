@@ -9,7 +9,7 @@
         <div v-if="subject.rating.average"><star :size="24" :score="subject.rating.average"></star><span class="num">{{subject.rating.average}}</span></div>
         <span v-else class="text">暂无评分</span>
       </div>
-      <p class="director">导演: {{subject.directors[0].name}}</p>
+      <p class="director">导演: <span v-if="subject.directors.length > 0">{{subject.directors[0].name}}</span></p>
       <p class="casts">主演: <span v-for="(item, index) in subject.casts">{{item.name}}<span v-if="index !== subject.casts.length-1">/</span></span></p>
       <p class="looked">{{subject.collect_count}}人看过</p>
     </div>
@@ -36,7 +36,7 @@
     },
     methods: {
       changePath(movieId){
-        this.$router.push("/movie-info/"+movieId);
+        this.$router.push("/movie-info/" + movieId);
       }
     },
     filters: {

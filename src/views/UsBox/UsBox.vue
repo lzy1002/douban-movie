@@ -40,10 +40,8 @@
     methods: {
       getUsBoxData(){
         getUsBoxData().then(res => {
-          console.log(res);
           this.usBoxData = formatUsBoxData(res);
           this.total = res.subjects.length;
-          console.log(this.usBoxData);
         })
       },
       leftClick(){

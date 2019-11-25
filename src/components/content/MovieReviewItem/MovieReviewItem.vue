@@ -35,9 +35,6 @@
         this.$router.push(`/movie-info/${this.movieId}/review/${this.review.id}`);
       }
     },
-    created(){
-      console.log(this.review);
-    },
     mounted(){
       this.$nextTick(() => {
         this.$emit("itemLoad");

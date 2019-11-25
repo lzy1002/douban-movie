@@ -98,19 +98,15 @@
     },
     created() {
       getTop250Data(0, 3).then(res => {
-        console.log(res);
         this.top250Data = res;
       });
       getWeeklyData().then(res => {
-        console.log(res);
         this.weeklyData = res;
       });
       getNewMovieData().then(res => {
-        console.log(res);
         this.newMovieData = res;
       });
       getUsBoxData().then(res => {
-        console.log(res);
         this.usBoxData = res;
       })
     }

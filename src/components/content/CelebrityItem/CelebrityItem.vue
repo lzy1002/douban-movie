@@ -35,9 +35,6 @@
       attachImageUrl(imgUrl){
         return attachImageUrl(imgUrl);
       }
-    },
-    created(){
-      console.log(this.celebrityData);
     }
   }
 </script>

@@ -41,15 +41,16 @@
     methods: {
       getWorksData(celebrityId, start, count){
         getWorksData(celebrityId, start, count).then(res => {
-          console.log(res);
           this.total = res.total;
           this.start += this.count;
           let format = fotmatWorksData(res);
-          console.log(format);
           this.worksData.push(...format);
         })
       },
       pullingUp(){
+        if(this.worksData.length === this.total){
+          return;
+        }
         this.getWorksData(this.$route.params.celebrityId, this.start, this.count);
       },
       leftClick(){
@@ -60,7 +61,6 @@
       }
     },
     created(){
-      console.log(this.$route.params.celebrityId);
       this.getWorksData(this.$route.params.celebrityId, this.start, this.count);
     }
   }

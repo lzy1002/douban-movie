@@ -45,7 +45,6 @@
     },
     methods: {
       itemClick(index){
-        console.log(index);
         this.activeIndex = index;
       },
       leftClick(){
