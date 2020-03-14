@@ -25,7 +25,7 @@
     computed: {
       ...mapGetters(["takeWantedArr"])
     },
-    activated(){
+    activated() {
       this.$refs.scroll.refresh();
     }
   }

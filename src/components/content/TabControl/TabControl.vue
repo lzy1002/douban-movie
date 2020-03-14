@@ -1,6 +1,6 @@
 <template>
   <div class="tab-control">
-    <tab-control-item v-for="(item, index) in titleList" :text="item" :index="index" @itemClick="itemClick" :class="{active: activeIndex===index}"></tab-control-item>
+    <tab-control-item v-for="(item, index) in titleList" :text="item" :index="index" @itemClick="itemClick" :class="{active: activeIndex === index}"></tab-control-item>
   </div>
 </template>
 
@@ -12,7 +12,7 @@
     props: {
       titleList: {
         type: Array,
-        default(){
+        default() {
           return []
         }
       }
@@ -20,13 +20,13 @@
     components: {
       TabControlItem
     },
-    data(){
+    data() {
       return {
         activeIndex: 0
       }
     },
     methods: {
-      itemClick(index){
+      itemClick(index) {
         this.activeIndex = index;
         this.$emit("itemClick", index);
       }
@@ -35,7 +35,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  @import "../../../common/stylus/variable.styl";
+  @import "../../../common/stylus/variable.styl"
 
   .tab-control
     display flex

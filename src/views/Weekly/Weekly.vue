@@ -31,25 +31,25 @@
       RankItem,
       Loading
     },
-    data(){
+    data() {
       return {
         total: 1,
         weeklyData: []
       }
     },
     methods: {
-      getWeeklyData(){
+      getWeeklyData() {
         getWeeklyData().then(res => {
           let arr = formatWeeklyData(res);
           this.weeklyData.push(...arr);
           this.total = arr.length;
         })
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       }
     },
-    created(){
+    created() {
       this.getWeeklyData();
     }
   }

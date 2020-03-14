@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  import {SYNCHRONIZATION_STATE} from "../../store/mutations-types.js";
+
   import TabControl from "../../components/content/TabControl/TabControl.vue";
 
   import CollectionWanted from "./childrenViews/CollectionWanted/CollectionWanted.vue";
@@ -32,16 +34,21 @@
       CollectionWatched,
       CollectionCelebrity
     },
-    data(){
+    data() {
       return {
         titleList: ["想看", "看过", "影人"],
         activeIndex: 0
       }
     },
     methods: {
-      itemClick(index){
+      itemClick(index) {
         this.activeIndex = index;
       }
+    },
+    created() {
+      this.$store.commit(SYNCHRONIZATION_STATE, "wantedArr");
+      this.$store.commit(SYNCHRONIZATION_STATE, "watchedArr");
+      this.$store.commit(SYNCHRONIZATION_STATE, "celebrityArr");
     }
   }
 </script>
@@ -83,5 +90,4 @@
       left 0
       right 0
       bottom 0
-
 </style>

@@ -33,7 +33,7 @@
       MovieReviewItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 0,
         count: 20,
@@ -44,7 +44,7 @@
       }
     },
     methods: {
-      getReviewsData(movieId, start, count){
+      getReviewsData(movieId, start, count) {
         getReviewsData(movieId, start, count).then(res => {
           this.title = res.subject.title;
           this.reviewsData.push(...res.reviews);
@@ -53,23 +53,23 @@
           this.movieId = res.subject.id;
         })
       },
-      pullingUp(){
-        if(this.reviewsData.length === this.total){
+      pullingUp() {
+        if(this.reviewsData.length === this.total) {
           return;
         }
         this.getReviewsData(this.$route.params.movieId, this.start, this.count);
       },
-      itemLoad(){
+      itemLoad() {
         this.$refs.scroll.refresh();
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       },
-      rightClick(){
+      rightClick() {
         this.$refs.scroll.scrollTo(0, 0, 1000);
       }
     },
-    created(){
+    created() {
       this.getReviewsData(this.$route.params.movieId, this.start, this.count);
     }
   }
@@ -105,5 +105,4 @@
     .screen-loading
       height 100%
       width 100%
-
 </style>

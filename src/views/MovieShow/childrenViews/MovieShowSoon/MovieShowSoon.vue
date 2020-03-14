@@ -17,7 +17,7 @@
 <script>
   import {getSoonData} from "../../../../api/movieList.js";
 
-  import {deBounce, decDate} from "../../../../common/js/utils.js";
+  import {deBounce, getDate} from "../../../../common/js/utils.js";
 
   import Scroll from "../../../../components/common/Scroll/Scroll.vue";
 
@@ -34,7 +34,7 @@
       MovieItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 0,
         count: 10,
@@ -51,7 +51,7 @@
       }
     },
     methods: {
-      getSoonData(start, count){
+      getSoonData(start, count) {
         getSoonData(start, count).then(res => {
           this.soonList.push(...res.subjects);
           this.start += this.count;
@@ -61,34 +61,34 @@
           })
         })
       },
-      pullingUp(){
-        if(this.soonList.length === this.total){
+      pullingUp() {
+        if(this.soonList.length === this.total) {
           return;
         }
         this.getSoonData(this.start, this.count);
       },
-      titleIsShow(pubdata){
-        if(activePubdata === pubdata){
+      titleIsShow(pubdata) {
+        if(activePubdata === pubdata) {
           return false;
         }else {
           activePubdata = pubdata;
           return true;
         }
       },
-      refresh(){
+      refresh() {
         this.deBounce();
       },
-      scroll(position){
+      scroll(position) {
         this.scrollY = position.y;
-        for(let i = 0; i< this.fixedTitleTopArr.length; i++){
-          if((this.activeIndex !== i) && (this.scrollY <= -this.fixedTitleTopArr[i] && this.scrollY > -this.fixedTitleTopArr[i+1])){
+        for(let i = 0; i< this.fixedTitleTopArr.length; i++) {
+          if((this.activeIndex !== i) && (this.scrollY <= -this.fixedTitleTopArr[i] && this.scrollY > -this.fixedTitleTopArr[i+1])) {
             this.activeIndex = i;
             this.nextHeight = this.fixedTitleTopArr[this.activeIndex + 1];
           }
         }
         this.diff = this.nextHeight + this.scrollY;
       },
-      createArray(){
+      createArray() {
         let topArr = [];
         let textArr = [];
         let titles = this.$refs.listBox.querySelectorAll(".fixedTitle");
@@ -102,32 +102,32 @@
       }
     },
     computed: {
-      activeText(){
+      activeText() {
         return this.textArr[this.activeIndex] ? this.textArr[this.activeIndex] : "";
       }
     },
     filters: {
-      decDate(date){
-        return date ? decDate(date) : "上映日期待定";
+      decDate(date) {
+        return date ? getDate(date) : "上映日期待定";
       }
     },
     watch: {
-      diff(newVal){
+      diff(newVal) {
         let fixedMove = newVal > 0 && newVal < fixedTitleHeight ? newVal - fixedTitleHeight : 0;
-        if(this.fixedMove === fixedMove){
+        if(this.fixedMove === fixedMove) {
           return;
         }
         this.fixedMove = fixedMove;
         this.$refs.fixedbox.style.transform = `translateY(${fixedMove}px)`;
       }
     },
-    created(){
+    created() {
       this.getSoonData(this.start, this.count);
     },
-    mounted(){
+    mounted() {
       this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
     },
-    activated(){
+    activated() {
       this.$refs.scroll.refresh();
     }
   }

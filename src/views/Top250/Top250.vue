@@ -38,16 +38,16 @@
       Top200Wrapper,
       Top250Wrapper
     },
-    data(){
+    data() {
       return {
         activeIndex: 0
       }
     },
     methods: {
-      itemClick(index){
+      itemClick(index) {
         this.activeIndex = index;
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       }
     }

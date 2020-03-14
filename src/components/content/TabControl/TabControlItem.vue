@@ -18,7 +18,7 @@
       }
     },
     methods: {
-      itemClick(){
+      itemClick() {
         this.$emit("itemClick", this.index);
       }
     }

@@ -18,7 +18,7 @@
     props: {
       review: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       },
@@ -31,11 +31,11 @@
       Star
     },
     methods: {
-      changePath(){
+      changePath() {
         this.$router.push(`/movie-info/${this.movieId}/review/${this.review.id}`);
       }
     },
-    mounted(){
+    mounted() {
       this.$nextTick(() => {
         this.$emit("itemLoad");
       })

@@ -6,3 +6,4 @@ export const ADD_TO_THUMB = "addToThumb";
 export const DELETE_TO_THUMB = "deleteToThumb";
 export const ADD_TO_CELEBRITY = "addToCelebrity";
 export const DELETE_TO_CELEBRITY = "deleteToCelebrity";
+export const SYNCHRONIZATION_STATE = "synchronizationState";

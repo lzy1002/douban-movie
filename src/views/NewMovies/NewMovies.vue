@@ -25,7 +25,7 @@
 
   export default {
     name: "NewMovies",
-    data(){
+    data() {
       return {
         total: 1,
         newMoviesData: []
@@ -38,17 +38,17 @@
       Loading
     },
     methods: {
-      getNewMovieData(){
+      getNewMovieData() {
         getNewMovieData().then(res => {
           this.newMoviesData.push(...res.subjects);
           this.total = res.subjects.length;
         })
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       }
     },
-    created(){
+    created() {
       this.getNewMovieData();
     }
   }

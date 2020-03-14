@@ -15,9 +15,9 @@
 </template>
 
 <script>
-  import {getCommentsData} from "../../api/comments.js";
-
   import Scroll from "../../components/common/Scroll/Scroll.vue";
+
+  import {getCommentsData} from "../../api/comments.js";
 
   import FixedBar from "../../components/content/FixedBar/FixedBar.vue";
   import MovieCommentItem from "../../components/content/MovieCommentItem/MovieCommentItem.vue";
@@ -31,7 +31,7 @@
       MovieCommentItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 0,
         count: 20,
@@ -41,7 +41,7 @@
       }
     },
     methods: {
-      getCommentsData(movieId, start, count){
+      getCommentsData(movieId, start, count) {
         getCommentsData(movieId, start, count).then(res => {
           this.title = res.subject.title;
           this.total = res.total;
@@ -49,23 +49,23 @@
           this.start += this.count;
         })
       },
-      pullingUp(){
-        if(this.commentsData.length === this.total){
+      pullingUp() {
+        if(this.commentsData.length === this.total) {
           return;
         }
         this.getCommentsData(this.$route.params.movieId, this.start, this.count);
       },
-      itemLoad(){
+      itemLoad() {
         this.$refs.scroll.refresh();
       },
-      back(){
+      back() {
         this.$router.back();
       },
-      toTop(){
+      toTop() {
         this.$refs.scroll.scrollTo(0, 0, 1000);
       }
     },
-    created(){
+    created() {
       this.getCommentsData(this.$route.params.movieId, this.start, this.count);
     }
   }

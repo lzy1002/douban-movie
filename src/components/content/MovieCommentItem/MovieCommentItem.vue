@@ -28,7 +28,7 @@
     props: {
       comment: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       }
@@ -36,31 +36,31 @@
     components: {
       Star
     },
-    data(){
+    data() {
       return {
         thumbCount: this.comment.useful_count
       }
     },
     methods: {
-      thumbActive(){
+      thumbActive() {
         const index = this.takeThumbArr.findIndex((item) => {
           return item === this.comment.id;
         });
-        if(index < 0){
+        if(index < 0) {
           this.thumbCount = this.comment.useful_count;
           return false;
         }
         this.thumbCount = this.comment.useful_count + 1;
         return true;
       },
-      thumbClick(){
+      thumbClick() {
         this.$store.dispatch("changeThumb", this.comment.id);
       }
     },
     computed: {
       ...mapGetters(["takeThumbArr"])
     },
-    mounted(){
+    mounted() {
       this.$nextTick(() => {
         this.$emit("itemLoad");
       })
@@ -104,5 +104,4 @@
       .date
         font-size $font-size-small-s
         line-height 25px
-
 </style>

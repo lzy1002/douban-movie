@@ -26,17 +26,17 @@
 
   export default {
     name: "Welcome",
-    data(){
+    data() {
       return {
         date: ""
       }
     },
     methods: {
-      getDate(){
+      getDate() {
         this.date = getDate();
       }
     },
-    created(){
+    created() {
       this.getDate();
     }
   }

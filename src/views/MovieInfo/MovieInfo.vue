@@ -90,6 +90,8 @@
 <script>
   import BScroll from "better-scroll";
 
+  import {SYNCHRONIZATION_STATE} from "../../store/mutations-types.js";
+
   import {getMovieInfoData} from "../../api/movieInfo.js";
 
   import {attachImageUrl, deBounce} from "../../common/js/utils.js";
@@ -137,20 +139,17 @@
         this.$store.dispatch("changeWatched", this.infoData);
       },
       wantedActive() {
-        const index = this.takeWantedArr.findIndex((item) => {
-          return item.id === this.infoData.id;
-        });
-        if (index > -1) {
+        const index = this.takeWantedArr.findIndex(item => item.id === this.infoData.id);
+        if(index === -1) {
+          this.wantedText = "想看";
+          return false;
+        }else {
           this.wantedText = "已想看";
           return true;
         }
-        this.wantedText = "想看";
-        return false;
       },
       watchedActive() {
-        const index = this.takeWatchedArr.findIndex((item) => {
-          return item.id === this.infoData.id;
-        });
+        const index = this.takeWatchedArr.findIndex((item) => item.id === this.infoData.id);
         if (index > -1) {
           this.watchedText = "已看过";
           this.userImgIsShow = true;
@@ -163,16 +162,16 @@
       imgLoad() {
         this.deBounce();
       },
-      itemClick(index){
+      itemClick(index) {
         this.activeIndex = index;
       },
-      toComments(){
+      toComments() {
         this.$router.push(`/movie-info/${this.$route.params.movieId}/comments`);
       },
-      toReviews(){
+      toReviews() {
         this.$router.push(`/movie-info/${this.$route.params.movieId}/reviews`);
       },
-      toCelebrity(celebrityId){
+      toCelebrity(celebrityId) {
         this.$router.push(`/celebrity/${celebrityId}`);
       }
     },
@@ -185,13 +184,15 @@
       }
     },
     created() {
+      this.$store.commit(SYNCHRONIZATION_STATE, "wantedArr");
+      this.$store.commit(SYNCHRONIZATION_STATE, "watchedArr");
+      this.$store.commit(SYNCHRONIZATION_STATE, "thumbArr");
       getMovieInfoData(this.$route.params.movieId).then(res => {
         this.infoData = res;
         this.$nextTick(() => {
           new BScroll(this.$refs.scrollRow, {
             scrollX: true
           });
-
           this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
         })
       });
@@ -373,5 +374,4 @@
             color $color-theme
           .no-comment,.no-review
             color $color-title
-
 </style>

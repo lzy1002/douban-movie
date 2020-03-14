@@ -26,7 +26,7 @@
     props: {
       subject: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       }
@@ -35,7 +35,7 @@
       Star
     },
     methods: {
-      changePath(movieId){
+      changePath(movieId) {
         this.$router.push("/movie-info/" + movieId);
       }
     },
@@ -44,7 +44,7 @@
         return attachImageUrl(imgUrl);
       }
     },
-    mounted(){
+    mounted() {
       this.$emit("refresh");
     }
   }

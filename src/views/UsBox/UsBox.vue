@@ -25,7 +25,7 @@
 
   export default {
     name: "UsBox",
-    data(){
+    data() {
       return {
         total: 1,
         usBoxData: []
@@ -38,17 +38,17 @@
       Loading
     },
     methods: {
-      getUsBoxData(){
+      getUsBoxData() {
         getUsBoxData().then(res => {
           this.usBoxData = formatUsBoxData(res);
           this.total = res.subjects.length;
         })
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       }
     },
-    created(){
+    created() {
       this.getUsBoxData();
     }
   }

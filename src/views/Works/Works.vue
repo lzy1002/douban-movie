@@ -30,7 +30,7 @@
       WorkItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 0,
         count: 20,
@@ -39,7 +39,7 @@
       }
     },
     methods: {
-      getWorksData(celebrityId, start, count){
+      getWorksData(celebrityId, start, count) {
         getWorksData(celebrityId, start, count).then(res => {
           this.total = res.total;
           this.start += this.count;
@@ -47,20 +47,20 @@
           this.worksData.push(...format);
         })
       },
-      pullingUp(){
-        if(this.worksData.length === this.total){
+      pullingUp() {
+        if(this.worksData.length === this.total) {
           return;
         }
         this.getWorksData(this.$route.params.celebrityId, this.start, this.count);
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       },
-      rightClick(){
+      rightClick() {
         this.$refs.scroll.scrollTo(0, 0, 1000);
       }
     },
-    created(){
+    created() {
       this.getWorksData(this.$route.params.celebrityId, this.start, this.count);
     }
   }

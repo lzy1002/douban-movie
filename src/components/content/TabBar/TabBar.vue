@@ -19,11 +19,8 @@
   export default {
     name: "TabBar",
     methods: {
-      changePath(path){
-        if(this.$route.path === path){
-          return;
-        }
-        this.$router.replace(path);
+      changePath(path) {
+        this.$route.path !== path && this.$router.replace(path);
       }
     }
   }

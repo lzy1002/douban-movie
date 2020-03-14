@@ -1,14 +1,14 @@
 export default {
-  takeWantedArr(state, getters){
+  takeWantedArr(state, getters) {
     return state.wantedArr;
   },
-  takeWatchedArr(state, getters){
+  takeWatchedArr(state, getters) {
     return state.watchedArr;
   },
-  takeThumbArr(state, getters){
+  takeThumbArr(state, getters) {
     return state.thumbArr;
   },
-  takeCelebrityArr(state, getters){
+  takeCelebrityArr(state, getters) {
     return state.celebrityArr;
   }
 }

@@ -88,6 +88,8 @@
 </template>
 
 <script>
+  import {SYNCHRONIZATION_STATE} from "../../store/mutations-types.js";
+
   import {mapGetters} from "vuex";
 
   import BScroll from "better-scroll";
@@ -108,7 +110,7 @@
       Star,
       Loading
     },
-    data(){
+    data() {
       return {
         celebrityData: null,
         deBounce: null,
@@ -118,7 +120,7 @@
       }
     },
     methods: {
-      getCelebrityData(celebrityId){
+      getCelebrityData(celebrityId) {
         getCelebrityData(celebrityId).then(res => {
           this.celebrityData = res;
           this.$nextTick(() => {
@@ -129,20 +131,20 @@
           })
         })
       },
-      leftClick(){
+      leftClick() {
         this.$router.back();
       },
-      imgLoad(){
+      imgLoad() {
         this.deBounce();
       },
-      collection(){
+      collection() {
         this.$store.dispatch("changeCollection", this.celebrityData);
       },
-      actionCollection(){
+      actionCollection() {
         const index = this.takeCelebrityArr.findIndex((item) => {
           return item.id === this.celebrityData.id;
         });
-        if(index < 0){
+        if(index < 0) {
           this.collectionText = "收藏";
           this.collectionIconClass = "icon-price-tags";
           return false;
@@ -152,16 +154,16 @@
           return true;
         }
       },
-      toMovieInfo(movieId){
+      toMovieInfo(movieId) {
         this.$router.push(`/movie-info/${movieId}`);
       },
-      toWorks(){
+      toWorks() {
         this.$router.push(`/celebrity/${this.$route.params.celebrityId}/works`);
       },
-      infoShow(){
+      infoShow() {
         this.infoIsShow = true;
       },
-      infoHide(){
+      infoHide() {
         this.infoIsShow = false;
       }
     },
@@ -173,7 +175,8 @@
         return attachImageUrl(imgUrl);
       }
     },
-    created(){
+    created() {
+      this.$store.commit(SYNCHRONIZATION_STATE, "celebrityArr");
       this.getCelebrityData(this.$route.params.celebrityId);
     }
   }
@@ -380,5 +383,4 @@
     .screen-loading
       height 100%
       width 100%
-
 </style>

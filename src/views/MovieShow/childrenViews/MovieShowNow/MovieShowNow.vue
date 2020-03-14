@@ -25,7 +25,7 @@
       MovieItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 0,
         count: 10,
@@ -35,7 +35,7 @@
       }
     },
     methods: {
-      getNowData(){
+      getNowData() {
         if(this.nowList.length >= this.total){
           return false;
         }
@@ -45,23 +45,23 @@
           this.total = res.total;
         })
       },
-      pullingUp(){
+      pullingUp() {
         if(this.nowList.length === this.total){
           return;
         }
         this.getNowData();
       },
-      refresh(){
+      refresh() {
         this.deBounce();
       }
     },
-    created(){
+    created() {
       this.getNowData();
     },
-    mounted(){
+    mounted() {
       this.deBounce = deBounce(this.$refs.scroll.refresh, 200);
     },
-    activated(){
+    activated() {
       this.$refs.scroll.refresh();
     }
   }

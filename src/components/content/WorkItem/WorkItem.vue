@@ -29,7 +29,7 @@
     props: {
       work: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       }
@@ -38,12 +38,12 @@
       Star
     },
     methods: {
-      toMovieInfo(){
+      toMovieInfo() {
         this.$router.push(`/movie-info/${this.work.id}`);
       }
     },
     filters: {
-      attachImageUrl(imgUrl){
+      attachImageUrl(imgUrl) {
         return attachImageUrl(imgUrl);
       }
     }

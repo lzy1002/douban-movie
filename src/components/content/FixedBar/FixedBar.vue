@@ -10,10 +10,10 @@
   export default {
     name: "FixedBar",
     methods: {
-      leftClick(){
+      leftClick() {
         this.$emit("leftClick");
       },
-      rightClick(){
+      rightClick() {
         this.$emit("rightClick");
       }
     }

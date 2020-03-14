@@ -25,7 +25,7 @@
     computed: {
       ...mapGetters(["takeWatchedArr"])
     },
-    activated(){
+    activated() {
       this.$refs.scroll.refresh();
     }
   }

@@ -21,20 +21,20 @@
         default: 0
       }
     },
-    data(){
+    data() {
       return {
         scroll: null
       }
     },
     methods: {
-      refresh(){
+      refresh() {
         this.scroll.refresh();
       },
-      scrollTo(x, y, time){
+      scrollTo(x, y, time) {
         this.scroll.scrollTo(x, y, time);
       }
     },
-    mounted(){
+    mounted() {
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         pullUpLoad: this.pullUpLoad,

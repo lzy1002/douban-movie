@@ -40,7 +40,7 @@
     props: {
       listData: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       },
@@ -54,16 +54,16 @@
       WorkItem
     },
     methods: {
-      toMovieInfo(){
+      toMovieInfo() {
         this.$router.push("/movie-info/" + this.listData.id);
       }
     },
     filters: {
-      attachImageUrl(imgUrl){
+      attachImageUrl(imgUrl) {
         return attachImageUrl(imgUrl);
       }
     },
-    mounted(){
+    mounted() {
       this.$nextTick(() => {
         this.$emit("itemLoad");
       })

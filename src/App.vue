@@ -20,19 +20,19 @@
       TabBar,
       Welcome
     },
-    data(){
+    data() {
       return {
         welcomeIsShow: true
       }
     },
     methods: {
-      changeShow(){
+      changeShow() {
         setTimeout(() => {
           this.welcomeIsShow = false;
         }, 1500)
       }
     },
-    mounted(){
+    mounted() {
       this.changeShow();
     }
   }

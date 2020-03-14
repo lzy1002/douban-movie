@@ -23,7 +23,7 @@
       RankItem,
       Loading
     },
-    data(){
+    data() {
       return {
         start: 200,
         count: 10,
@@ -32,23 +32,23 @@
       }
     },
     methods: {
-      getTop250Data(start, count){
+      getTop250Data(start, count) {
         getTop250Data(start, count).then(res => {
           this.listArr.push(...res.subjects);
           this.start += this.count;
         })
       },
-      pullingUp(){
-        if(this.listArr.length === this.total){
+      pullingUp() {
+        if(this.listArr.length === this.total) {
           return false;
         }
         this.getTop250Data(this.start, this.count);
       },
-      itemLoad(){
+      itemLoad() {
         this.$refs.scroll.refresh();
       }
     },
-    created(){
+    created() {
       this.getTop250Data(this.start, this.count);
     }
   }

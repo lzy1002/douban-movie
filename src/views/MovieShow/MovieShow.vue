@@ -10,8 +10,6 @@
 </template>
 
 <script>
-  import Scroll from "../../components/common/Scroll/Scroll.vue";
-
   import SearchBar from "../../components/content/SearchBar/SearchBar.vue";
   import TabControl from "../../components/content/TabControl/TabControl.vue";
 
@@ -21,19 +19,18 @@
   export default {
     name: "MovieShow",
     components: {
-      Scroll,
       SearchBar,
       TabControl,
       MovieShowNow,
       MovieShowSoon
     },
-    data(){
+    data() {
       return {
         activeIndex: 0
       }
     },
     methods: {
-      itemClick(index){
+      itemClick(index) {
         this.activeIndex = index;
       }
     }

@@ -10,41 +10,33 @@ import {
 } from "./mutations-types";
 
 export default {
-  changeWanted(context, infoData){
-    const index = context.state.wantedArr.findIndex((item) => {
-      return item.id === infoData.id;
-    });
-    if(index <= -1){
+  changeWanted(context, infoData) {
+    const index = context.state.wantedArr.findIndex(item => item.id === infoData.id);
+    if(index === -1) {
       context.commit(ADD_TO_WANTED, infoData);
     }else {
       context.commit(DELETE_TO_WANTED, index);
     }
   },
-  changeWatched(context, infoData){
-    const index = context.state.watchedArr.findIndex((item) => {
-      return item.id === infoData.id;
-    });
-    if(index <= -1){
+  changeWatched(context, infoData) {
+    const index = context.state.watchedArr.findIndex((item) => item.id === infoData.id);
+    if(index === -1) {
       context.commit(ADD_TO_WATCHED, infoData);
     }else {
       context.commit(DELETE_TO_WATCHED, index);
     }
   },
-  changeThumb(context, commentId){
-    const index = context.state.thumbArr.findIndex((item) => {
-      return commentId === item;
-    });
-    if(index < 0){
+  changeThumb(context, commentId) {
+    const index = context.state.thumbArr.findIndex((item) => commentId === item);
+    if(index === -1) {
       context.commit(ADD_TO_THUMB, commentId);
     }else {
       context.commit(DELETE_TO_THUMB, index);
     }
   },
-  changeCollection(context,celebrityData){
-    const index = context.state.celebrityArr.findIndex((item) => {
-      return item.id === celebrityData.id;
-    });
-    if(index < 0){
+  changeCollection(context,celebrityData) {
+    const index = context.state.celebrityArr.findIndex((item) => item.id === celebrityData.id);
+    if(index === -1) {
       context.commit(ADD_TO_CELEBRITY, celebrityData);
     }else {
       context.commit(DELETE_TO_CELEBRITY, index);

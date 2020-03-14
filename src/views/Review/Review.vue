@@ -48,22 +48,22 @@
       FixedBar,
       Loading
     },
-    data(){
+    data() {
       return {
         reviewData: null
       }
     },
     methods: {
-      back(){
+      back() {
         this.$router.back();
       }
     },
     filters: {
-      splitData(date){
+      splitData(date) {
         return date.split(" ")[0];
       }
     },
-    created(){
+    created() {
       getReviewData(this.$route.params.reviewId).then(res => {
         this.reviewData = res;
       })

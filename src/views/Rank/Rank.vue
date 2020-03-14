@@ -82,12 +82,12 @@
       }
     },
     methods: {
-      changePath(path){
+      changePath(path) {
         this.$router.push("/rank/" + path);
       }
     },
     computed: {
-      dataIsLoad(){
+      dataIsLoad() {
         return this.top250Data && this.weeklyData && this.newMovieData && this.usBoxData;
       }
     },

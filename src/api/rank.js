@@ -24,7 +24,7 @@ export function getWeeklyData() {
 
 export function formatWeeklyData(weeklyData) {
   let arr = [];
-  for(let i = 0; i< weeklyData.subjects.length; i++){
+  for(let i = 0; i< weeklyData.subjects.length; i++) {
     arr.push(weeklyData.subjects[i].subject);
   }
   return arr;

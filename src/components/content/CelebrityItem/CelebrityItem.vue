@@ -21,18 +21,18 @@
     props: {
       celebrityData: {
         type: Object,
-        default(){
+        default() {
           return {}
         }
       }
     },
     methods: {
-      toCelebrityInfo(){
+      toCelebrityInfo() {
         this.$router.push("/celebrity/" + this.celebrityData.id);
       }
     },
     filters: {
-      attachImageUrl(imgUrl){
+      attachImageUrl(imgUrl) {
         return attachImageUrl(imgUrl);
       }
     }

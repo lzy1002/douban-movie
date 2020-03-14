@@ -18,18 +18,18 @@
       }
     },
     computed: {
-      starSize(){
+      starSize() {
         return `star-${this.size}`;
       },
-      starArr(){
+      starArr() {
         let arr = [];
         let score = this.score > 5 ? this.score / 2 : this.score;
         let integer = Math.floor(score);
-        for(let i = 0; i< integer; i++){
+        for(let i = 0; i< integer; i++) {
           arr.push("on");
         }
         score - integer > 0 ? arr.push("half") : "";
-        while(arr.length !== 5){
+        while(arr.length !== 5) {
           arr.push("off");
         }
         return arr;
