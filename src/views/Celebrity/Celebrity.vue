@@ -8,7 +8,7 @@
     </div>
     <scroll v-if="celebrityData" class="scroll" ref="scroll">
       <div class="imgBox">
-        <img :src="celebrityData.avatars.large | attachImageUrl" alt="">
+        <img :src="celebrityData.avatars.large" alt="">
       </div>
       <div class="content">
         <div class="name-box">
@@ -30,7 +30,7 @@
           <div class="content-box">
             <div class="works-item" v-for="(item, index) in celebrityData.works" @click="toMovieInfo(item.subject.id)">
               <div class="image-box">
-                <img :src="item.subject.images.large | attachImageUrl" alt="" @load="imgLoad">
+                <img :src="item.subject.images.large" alt="" @load="imgLoad">
               </div>
               <p class="name">{{item.subject.title}}</p>
               <div class="score">

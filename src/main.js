@@ -5,6 +5,8 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+require("./mock/index.js");  // 使用mockjs模拟数据
+
 import "./common/stylus/index.styl";
 
 new Vue({

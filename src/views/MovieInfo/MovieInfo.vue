@@ -11,7 +11,7 @@
     </div>
     <scroll v-if="infoData" class="scroll" ref="scroll">
       <div class="imageBox">
-        <img :src="infoData.images.large | attachImageUrl" alt="">
+        <img :src="infoData.images.large" alt="">
       </div>
       <div class="content">
         <div class="info">
@@ -50,12 +50,12 @@
           <div class="wrapper" ref="scrollRow">
             <div v-if="infoData.casts.length > 0 || infoData.directors.length > 0" class="casts-box">
               <div v-if="item.id !== null" class="casts-item" v-for="item in infoData.directors" @click="toCelebrity(item.id)">
-                <img v-if="item.avatars !== null" :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
+                <img v-if="item.avatars !== null" :src="item.avatars.small" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
                 <p>导演</p>
               </div>
               <div v-if="item.id !== null" class="casts-item" v-for="item in infoData.casts"  @click="toCelebrity(item.id)">
-                <img v-if="item.avatars !== null" :src="item.avatars.small | attachImageUrl" alt="" @load="imgLoad">
+                <img v-if="item.avatars !== null" :src="item.avatars.small" alt="" @load="imgLoad">
                 <p class="name">{{item.name}}</p>
               </div>
             </div>
@@ -73,7 +73,7 @@
           <div v-else class="no-comment">暂时没有任何短评</div>
         </div>
         <div v-show="activeIndex === 1" class="movie-review">
-          <movie-review-item v-for="(item, index) in infoData.popular_reviews" :review="item" :movie-id="infoData.id"></movie-review-item>
+          <movie-review-item v-for="(item, index) in infoData.popular_reviews" :review="item" :movie-id="$route.params.movieId"></movie-review-item>
           <div v-if="infoData.popular_reviews.length > 0" class="more-review" @click="toReviews">全部影评{{infoData.reviews_count}}个</div>
           <div v-else class="no-review">暂时没有任何影评</div>
         </div>

@@ -2,7 +2,7 @@
   <div class="work-item" @click="toMovieInfo">
     <div class="main">
       <div class="imageBox">
-        <img :src="this.work.images.medium | attachImageUrl" alt="">
+        <img :src="this.work.images.medium" alt="">
       </div>
       <div class="content">
         <h3 class="title">{{work.title}}</h3>

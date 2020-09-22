@@ -23,3 +23,17 @@ export function getDate(date) {
   let weekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
   return `${year}年${month}月${day}日, ${weekArr[week]}`;
 }
+
+export function splitParams(url) {
+  let params = url.split("?")[1];
+  let paramsList = params.split("&");
+
+  let paramsObj = {};
+
+  for(let i = 0; i< paramsList.length; i++) {
+    let itemList = paramsList[i].split("=");
+    paramsObj[itemList[0]] = itemList[1];
+  }
+
+  return paramsObj;
+}

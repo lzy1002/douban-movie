@@ -1,7 +1,7 @@
 <template>
   <div class="movie-item" @click="changePath(subject.id)">
     <div class="image">
-      <img :src="subject.images.small | attachImageUrl">
+      <img :src="subject.images.small">
     </div>
     <div class="content">
       <h1 class="title">{{subject.title}}</h1>
